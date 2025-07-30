@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Item_Purchase_Tool</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Open Item Purchase Tool</masterLabel>
+    <openType>noSidebar</openType>
+    <protected>false</protected>
+    <url>{!LEFT($Api.Partner_Server_URL_370, FIND(&quot;/services&quot;, $Api.Partner_Server_URL_370))}
+/lightning/n/ItemPurchase</url>
+</WebLink>
