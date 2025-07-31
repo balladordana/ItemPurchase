@@ -1,0 +1,34 @@
+<template>
+  <div class="slds-box slds-theme_default">
+
+    <div class="slds-grid slds-p-around_small">
+
+      <!-- Колонка 1: Create Item -->
+      <div class="slds-col slds-size_1-of-5">
+        <lightning-button label="Create Item" onclick={handleCreate}></lightning-button>
+      </div>
+
+      <!-- Колонка 2: Account Name -->
+      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
+        <span>Account Name</span>
+      </div>
+
+      <!-- Колонка 3: Account Number -->
+      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
+        <span>Account Number</span>
+      </div>
+
+      <!-- Колонка 4: Industry -->
+      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
+        <span>Industry</span>
+      </div>
+
+      <!-- Колонка 5: Cart кнопка прижата вправо -->
+      <div class="slds-col slds-size_1-of-5 slds-text-align_right">
+        <lightning-button label="Cart" onclick={goToCart}></lightning-button>
+      </div>
+
+    </div>
+
+  </div>
+</template>
