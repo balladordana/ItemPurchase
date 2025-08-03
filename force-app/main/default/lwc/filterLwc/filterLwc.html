@@ -1,6 +1,9 @@
 <template>
     <lightning-card title="Filters" icon-name="standard:calibration">
         <div class="slds-var-m-horizontal_medium">
+            <div class="slds-m-bottom_small">
+                <strong>Items count: {count}</strong>
+            </div>
             <section>
                 <h1>Type</h1>
                 <template lwc:if={types.data}>
@@ -22,8 +25,8 @@
                 <template lwc:if={types.error}>
                     <c-error-panel
                         type="inlineMessage"
-                        friendly-message="Error loading categories"
-                        errors={categories.error}
+                        friendly-message="Error loading types"
+                        errors={types.error}
                     ></c-error-panel>
                 </template>
             </section>

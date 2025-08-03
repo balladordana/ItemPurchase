@@ -1,29 +1,22 @@
 import { LightningElement, wire } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 
+// Lightning Message Service and a message channel
+import { publish, subscribe, MessageContext } from 'lightning/messageService';
+import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/ProductsFiltered__c';
+import PRODUCTS_COUNT_MESSAGE from '@salesforce/messageChannel/ProductsCount__c';
+
 // Product schema
 import TYPE_FIELD from '@salesforce/schema/Item__c.Type__c';
 import FAMILY_FIELD from '@salesforce/schema/Item__c.Family__c';
 
-// Lightning Message Service and a message channel
-import { publish, MessageContext } from 'lightning/messageService';
-import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/ProductsFiltered__c';
-
-// The delay used when debouncing event handlers before firing the event
-const DELAY = 350;
-
-/**
- * Displays a filter panel to search for Product__c[].
- */
 export default class ItemFilter extends LightningElement {
-    searchKey = '';
+    count = 0;
+    @wire(MessageContext) messageContext;
 
     filters = {
         searchKey: ''
     };
-
-    @wire(MessageContext)
-    messageContext;
 
     @wire(getPicklistValues, {
         recordTypeId: '012000000000000AAA',
@@ -37,10 +30,22 @@ export default class ItemFilter extends LightningElement {
     })
     families;
 
-    handleSearchKeyChange(event) {
-        this.filters.searchKey = event.target.value;
-        this.delayedFireFilterChangeEvent();
+    connectedCallback() {
+        // Subscribe to ProductsFiltered message
+        this.itemFilterSubscription = subscribe(
+            this.messageContext,
+            PRODUCTS_COUNT_MESSAGE,
+            (message) => this.handleFilterChange(message)
+        );
     }
+
+    handleFilterChange(message) {
+        console.error('Count', message.count);
+        if (message.count !== undefined) {
+            this.count = message.count;
+        }
+    }
+
 
     handleCheckboxChange(event) {
         if (!this.filters.types) {
@@ -63,23 +68,10 @@ export default class ItemFilter extends LightningElement {
                 (item) => item !== value
             );
         }
-        // Published ProductsFiltered message
-        // publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
-        //     filters: this.filters
-        // });
+
+        publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
+            filters: this.filters
+        });
     }
 
-    // delayedFireFilterChangeEvent() {
-    //     // Debouncing this method: Do not actually fire the event as long as this function is
-    //     // being called within a delay of DELAY. This is to avoid a very large number of Apex
-    //     // method calls in components listening to this event.
-    //     window.clearTimeout(this.delayTimeout);
-    //     // eslint-disable-next-line @lwc/lwc/no-async-operation
-    //     this.delayTimeout = setTimeout(() => {
-    //         // Published ProductsFiltered message
-    //         publish(this.messageContext, PRODUCTS_FILTERED_MESSAGE, {
-    //             filters: this.filters
-    //         });
-    //     }, DELAY);
-    // }
 }
