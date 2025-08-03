@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Filters" icon-name="standard:calibration">
+        <div class="slds-var-m-horizontal_medium">
+            <section>
+                <h1>Type</h1>
+                <template lwc:if={types.data}>
+                    <template
+                        for:each={types.data.values}
+                        for:item="type"
+                    >
+                        <lightning-input
+                            key={type.value}
+                            label={type.label}
+                            data-filter="types"
+                            data-value={type.value}
+                            type="checkbox"
+                            checked
+                            onchange={handleCheckboxChange}
+                        ></lightning-input>
+                    </template>
+                </template>
+                <template lwc:if={types.error}>
+                    <c-error-panel
+                        type="inlineMessage"
+                        friendly-message="Error loading categories"
+                        errors={categories.error}
+                    ></c-error-panel>
+                </template>
+            </section>
+            <section>
+                <h1>Family</h1>
+                <template lwc:if={families.data}>
+                    <template
+                        for:each={families.data.values}
+                        for:item="family"
+                    >
+                        <lightning-input
+                            key={family.value}
+                            label={family.label}
+                            data-filter="families"
+                            data-value={family.value}
+                            type="checkbox"
+                            checked
+                            onchange={handleCheckboxChange}
+                        ></lightning-input>
+                    </template>
+                </template>
+                <template lwc:if={families.error}>
+                    <c-error-panel
+                        type="inlineMessage"
+                        friendly-message="Error loading families"
+                        errors={families.error}
+                    ></c-error-panel>
+                </template>
+            </section>
+        </div>
+    </lightning-card>
+</template>
