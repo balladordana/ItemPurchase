@@ -6,10 +6,7 @@ public with sharing class PurchaseController {
     }
 
     @AuraEnabled
-    public static Id createPurchaseWithLines(List<CartItemInput> cartItems) {
-        Id accountId = '001WU000017zcrrYAA';
-
-        System.debug('cartItems passed: ' + cartItems);
+    public static Id createPurchaseWithLines(List<CartItemInput> cartItems, Id accountId) {
         if (cartItems == null || cartItems.isEmpty()) {
             throw new AuraHandledException('Cart is empty');
         }
@@ -20,7 +17,6 @@ public with sharing class PurchaseController {
 
         List<PurchaseLine__c> lines = new List<PurchaseLine__c>();
         for (CartItemInput ci : cartItems) {
-            System.debug(ci);
             lines.add(new PurchaseLine__c(
                 PurchaseId__c = purchase.Id,
                 ItemId__c = ci.itemId,
