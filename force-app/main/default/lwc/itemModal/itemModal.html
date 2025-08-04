@@ -1,0 +1,18 @@
+<template>
+    <lightning-modal-header label={content.Name}></lightning-modal-header>
+    <lightning-modal-body> 
+        <div class="slds-var-m-horizontal_medium">
+            <lightning-record-view-form
+            record-id={content.Id}
+            object-api-name="Item__c"
+            >
+                <lightning-output-field field-name={nameField}></lightning-output-field>
+                <lightning-output-field field-name={typeField}></lightning-output-field>
+                <lightning-output-field field-name={familyField}></lightning-output-field>
+                <lightning-output-field field-name={descriptionField}></lightning-output-field>
+                <lightning-output-field field-name={priceField}></lightning-output-field>
+            </lightning-record-view-form>
+        </div>
+    </lightning-modal-body>
+</template>
+
