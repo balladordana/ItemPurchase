@@ -1,18 +1,41 @@
 <template>
-    <lightning-modal-header label={content.Name}></lightning-modal-header>
-    <lightning-modal-body> 
-        <div class="slds-var-m-horizontal_medium">
-            <lightning-record-view-form
-            record-id={content.Id}
-            object-api-name="Item__c"
-            >
-                <lightning-output-field field-name={nameField}></lightning-output-field>
-                <lightning-output-field field-name={typeField}></lightning-output-field>
-                <lightning-output-field field-name={familyField}></lightning-output-field>
-                <lightning-output-field field-name={descriptionField}></lightning-output-field>
-                <lightning-output-field field-name={priceField}></lightning-output-field>
-            </lightning-record-view-form>
+    <lightning-modal-header label='Details'></lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-grid slds-gutters slds-p-around_medium slds-align-top">
+
+            <!-- Левая колонка с данными -->
+            <div class="slds-col slds-size_2-of-3">
+                <div class="slds-m-bottom_small">
+                    <strong>Name:</strong> {content.Name}
+                </div>
+                <div class="slds-m-bottom_small">
+                    <strong>Type:</strong> {content.Type__c}
+                </div>
+                <div class="slds-m-bottom_small">
+                    <strong>Family:</strong> {content.Family__c}
+                </div>
+                <div class="slds-m-bottom_small">
+                    <strong>Description:</strong> {content.Description__c}
+                </div>
+                <div class="slds-m-bottom_small">
+                    <strong>Price:</strong> {content.Price__c}
+                </div>
+            </div>
+
+            <!-- Правая колонка с изображением -->
+            <div class="slds-col slds-size_1-of-3 slds-text-align_center">
+                <template if:true={content.Image__c}>
+                    <img
+                        src={content.Image__c}
+                        alt="Product image"
+                        style="max-width: 100%; border-radius: 6px;"
+                    />
+                </template>
+                <template if:false={content.Image__c}>
+                    <p class="slds-text-color_weak">No image</p>
+                </template>
+            </div>
+
         </div>
     </lightning-modal-body>
 </template>
-
