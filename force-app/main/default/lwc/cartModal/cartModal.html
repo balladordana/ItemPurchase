@@ -1,0 +1,41 @@
+<template>
+    <lightning-modal-header label="Cart"></lightning-modal-header>
+    <lightning-modal-body>
+        <div class="slds-var-m-horizontal_medium">
+
+            <template if:true={groupedCart.length}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-bottom_medium">
+                    <thead>
+                        <tr>
+                            <th scope="col"><div class="slds-truncate" title="Item">Item</div></th>
+                            <th scope="col"><div class="slds-truncate" title="Price">Price</div></th>
+                            <th scope="col"><div class="slds-truncate" title="Count">Count</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={groupedCart} for:item="item">
+                            <tr key={item.Id}>
+                                <td><div class="slds-truncate" title={item.Name}>{item.Name}</div></td>
+                                <td><div class="slds-truncate" title={item.Price__c}>{item.Price__c}</div></td>
+                                <td><div class="slds-truncate" title={item.quantity}>{item.quantity}</div></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                
+                <lightning-button
+                    variant="brand"
+                    label="Checkout"
+                    onclick={handleCheckout}>
+                </lightning-button>
+            </template>
+
+            <template if:false={groupedCart.length}>
+                <div class="slds-align_absolute-center slds-text-align_center slds-p-vertical_large">
+                    <p>Cart is empty</p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-modal-body>
+</template>
