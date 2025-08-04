@@ -16,5 +16,5 @@
     <protected>false</protected>
     <showsLocation>false</showsLocation>
     <showsStatus>false</showsStatus>
-    <url>/lightning/n/ItemPurchaseTool1?recordId={!Account.Id}</url>
+    <url>/lightning/n/ItemPurchaseTool1?c__recordId={!Account.Id}</url>
 </WebLink>
