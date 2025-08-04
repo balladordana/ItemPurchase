@@ -5,23 +5,31 @@
 
       <!-- Колонка 1: Create Item -->
       <div class="slds-col slds-size_1-of-5">
-        <lightning-button label="Create Item" onclick={handleCreate}></lightning-button>
+        <template if:true={isManager}>
+                <lightning-button
+                    variant="neutral"
+                    label="Create Item"
+                    onclick={handleCreate}
+                    class="slds-m-top_medium">
+                </lightning-button>
+            </template>
       </div>
+      <template if:true={account}>
+        <!-- Колонка 2: Account Name -->
+        <div class="slds-col slds-size_1-of-5 slds-text-align_center slds-text-heading_medium">
+          <span>{account.Name}</span>
+        </div>
 
-      <!-- Колонка 2: Account Name -->
-      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
-        <span>Account Name</span>
-      </div>
+        <!-- Колонка 3: Account Number -->
+        <div class="slds-col slds-size_1-of-5 slds-text-align_center slds-text-heading_medium">
+          <span>{account.AccountNumber}</span>
+        </div>
 
-      <!-- Колонка 3: Account Number -->
-      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
-        <span>Account Number</span>
-      </div>
-
-      <!-- Колонка 4: Industry -->
-      <div class="slds-col slds-size_1-of-5 slds-text-align_center">
-        <span>Industry</span>
-      </div>
+        <!-- Колонка 4: Industry -->
+        <div class="slds-col slds-size_1-of-5 slds-text-align_center slds-text-heading_medium">
+          <span>{account.Industry}</span>
+        </div>
+      </template>
 
       <!-- Колонка 5: Cart кнопка прижата вправо -->
       <div class="slds-col slds-size_1-of-5 slds-text-align_right">
