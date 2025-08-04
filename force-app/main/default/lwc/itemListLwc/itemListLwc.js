@@ -59,4 +59,9 @@ export default class ItemList extends LightningElement {
         };
     }
 
+    get hasItems() {
+        return this.items && this.items.length > 0;
+    }
+
+
 }

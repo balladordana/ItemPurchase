@@ -5,7 +5,7 @@
             type="search"
             onchange={handleSearchKeyChange}
         ></lightning-input>
-        <template lwc:if={items}>
+        <template lwc:if={hasItems}>
             <div class="content">
                 <template
                     for:each={items}
@@ -23,9 +23,10 @@
             </div>
         </template>
         <template lwc:else>
-            <c-placeholder
-                message="There are no products matching your current selection"
-            ></c-placeholder>
+            <div class="slds-align_absolute-center slds-m-around_medium slds-text-align_center slds-text-color_weak">
+                <lightning-icon icon-name="utility:search" size="large" alternative-text="Search"></lightning-icon>
+                <h3 class="slds-text-heading_medium slds-m-top_medium">No matching products found</h3>
+            </div>
         </template>
         <template lwc:if={itemsError}>
             <c-error-panel errors={itemsError}></c-error-panel>
