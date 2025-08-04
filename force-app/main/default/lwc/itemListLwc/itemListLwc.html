@@ -1,0 +1,52 @@
+<template>
+    <div class="slds-card slds-var-p-around_x-small">
+        <lightning-input
+            label="Search Key"
+            type="search"
+            onchange={handleSearchKeyChange}
+        ></lightning-input>
+        <template lwc:if={items}>
+            <div class="content">
+                <template
+                    for:each={items}
+                    for:item="item"
+                >
+                    <c-item-tile
+                        key={item.Id}
+                        item={item}                            
+                        onviewdetails={handleViewDetails}
+                        onaddtocart={handleAddToCart}
+                        class="slds-var-m-around_x-small"
+                    >
+                    </c-item-tile>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <c-placeholder
+                message="There are no products matching your current selection"
+            ></c-placeholder>
+        </template>
+        <template lwc:if={itemsError}>
+            <c-error-panel errors={itemsError}></c-error-panel>
+        </template>
+    </div>
+
+    
+    <template if:true={showModal}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title">{selectedItem.Name}</h2>
+                </header>
+                <div class="slds-modal__content">
+                    <p>{selectedItem.Description__c}</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Close" onclick={closeModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
